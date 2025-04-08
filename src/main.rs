@@ -205,8 +205,6 @@ impl Lexer {
 fn main() -> io::Result<()> {
     let main_file = fs::read_to_string("../app/func.ks").expect("could not find file");   
     let mut lexer = Lexer::new(main_file.chars().collect());
-        
-    println!("{:?}", main_file.chars());
 
     lexer.tokenize_chars();
     lexer.print_tokens();
