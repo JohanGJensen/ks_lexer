@@ -12,6 +12,8 @@ enum TokenType {
     StringVar,
     IntVar,
     VarName,
+    If,
+    Else,
     // operators
     ParentLeft,
     ParentRight,
@@ -80,6 +82,16 @@ impl Lexer {
 
             if keyword == "funktion" {
                 self.tokens.push(Token { token: TokenType::Function, value: keyword });
+                break;
+            }
+
+            if keyword == "hvis" {
+                self.tokens.push(Token { token: TokenType::If, value: keyword });
+                break;
+            }
+
+            if keyword == "eller" {
+                self.tokens.push(Token { token: TokenType::Else, value: keyword });
                 break;
             }
 
@@ -203,7 +215,7 @@ impl Lexer {
 }
 
 fn main() -> io::Result<()> {
-    let main_file = fs::read_to_string("../app/func.ks").expect("could not find file");   
+    let main_file = fs::read_to_string("../app/index.ks").expect("could not find file");   
     let mut lexer = Lexer::new(main_file.chars().collect());
 
     lexer.tokenize_chars();
